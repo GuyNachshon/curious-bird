@@ -92,7 +92,7 @@
 
 /* Info Panel */
 .info-panel {
-  min-height: 170px;
+  min-height: 100px;
   height: max-content;
   border: 1.5px solid #73c7eb;
   display: flex;
