@@ -15,7 +15,7 @@
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 265px);
+  grid-template-columns: repeat(auto-fill, 207px);
   column-gap: 56px;
   row-gap: 48px;
   justify-content: center;
@@ -29,8 +29,8 @@
 }
 
 .bird-media-wrap {
-  width: 265px;
-  height: 396px;
+  width: 207px;
+  height: 311px;
   overflow: hidden;
   flex-shrink: 0;
   border: 3px solid #73c7eb;
