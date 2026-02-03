@@ -132,12 +132,11 @@
 .info-section {
   flex: 0 0 auto;
   min-width: 0;
-  padding: 24px 24px 24px 50px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 4px;
-  color: #87c6e9;
-  font-size: 22px;
+  color: #87C6E9;
   opacity: 0;
   transform: translateX(30px);
   transition: opacity 0.4s ease, transform 0.4s ease;
@@ -162,8 +161,6 @@
 
 .english-section {
   text-align: left;
-  padding-left: 24px;
-  padding-right: 50px;
 }
 
 .hebrew-section {
@@ -177,34 +174,60 @@
 
 .info-row {
   margin: 0;
-  line-height: 1.37;
+  color: #87C6E9;
   white-space: nowrap;
 }
 
-.info-row.info-title {
+/* English */
+.english-section .info-row.info-title {
   font-family: 'Masada', sans-serif;
-  font-weight: bold;
-  font-size: 22px;
-  letter-spacing: 0.88px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 130%;
+  letter-spacing: -0.32px;
 }
 
-.english-section .info-row:not(.info-title),
+.english-section .info-row:not(.info-title) {
+  font-family: 'Masada', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 130%;
+  letter-spacing: -0.32px;
+}
+
+/* Hebrew */
+.hebrew-section .info-row.info-title {
+  text-align: right;
+  font-family: 'Masada', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 130%;
+  letter-spacing: -0.32px;
+}
+
 .hebrew-section .info-row:not(.info-title) {
   font-family: 'Masada', sans-serif;
-  font-weight: normal;
-  font-size: 22px;
-  letter-spacing: -0.44px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 130%;
+  letter-spacing: -0.32px;
 }
 
+/* Arabic */
 .arabic-section .info-row.info-title {
+  text-align: right;
   font-family: 'Nassim Arabic Pro', sans-serif;
+  font-size: 18px;
   font-weight: 800;
+  line-height: normal;
 }
 
 .arabic-section .info-row:not(.info-title) {
+  text-align: right;
   font-family: 'Nassim Arabic Pro', sans-serif;
+  font-size: 18px;
   font-weight: 500;
-  line-height: 1.43;
+  line-height: 143%;
 }
 
 /* Section Dividers */
@@ -246,9 +269,12 @@
 
 .label-text {
   font-family: 'Ratzif22', sans-serif;
-  font-size: 26px;
-  color: #87c6e9;
-  letter-spacing: 2.6px;
+  font-size: 22px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 2.2px;
+  color: #87C6E9;
   margin: 0;
   text-align: right;
 }

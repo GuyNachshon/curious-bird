@@ -7,10 +7,10 @@
 }
 
 .gallery-container {
-  background-color: #4D2E19;
+  background-color: #50331e;
   width: 100%;
   min-height: 100vh;
-  padding: 40px 40px;
+  padding: 40pxg 40px;
 }
 
 .gallery-grid {
