@@ -1,0 +1,65 @@
+@font-face {
+  font-family: 'Ratzif22';
+  src: url('/fonts/Ratzif22-regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.gallery-container {
+  background-color: #4D2E19;
+  width: 100%;
+  min-height: 100vh;
+  padding: 60px 40px;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 265px);
+  column-gap: 56px;
+  row-gap: 48px;
+  justify-content: center;
+}
+
+.bird-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.bird-media-wrap {
+  width: 265px;
+  height: 396px;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 3px solid #73c7eb;
+  box-sizing: border-box;
+}
+
+.bird-media-wrap video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  display: block;
+}
+
+.bird-media-wrap-hiding {
+  visibility: hidden;
+}
+
+.bird-label {
+  font-family: 'Ratzif22', sans-serif;
+  font-size: 20px;
+  color: #73c7eb;
+  text-align: center;
+  margin: 0;
+  font-style: normal;
+  line-height: normal;
+  font-weight: normal;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 10px;
+}

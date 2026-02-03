@@ -1,0 +1,152 @@
+import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import './BirdDetail.css';
+import arrowSvg from './assets/arrow.svg';
+import { birds } from './birdData';
+import { useBirdTransition } from './BirdTransitionContext';
+
+function BirdDetail() {
+  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+  const { selectedBirdId, startBackTransition } = useBirdTransition();
+  const bird = birds.find(b => b.id === id);
+  const useOverlayVideo = selectedBirdId === id;
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [showAdditionalInfo, setShowAdditionalInfo] = useState(false);
+  const [isExiting, setIsExiting] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsExpanded(true);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!bird) {
+    return <div>Bird not found</div>;
+  }
+
+  const handleBackClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!useOverlayVideo) {
+      navigate('/');
+      return;
+    }
+    const hideThenAnimate = () => {
+      setIsExiting(true);
+      setTimeout(() => startBackTransition(), 150);
+    };
+    if (isExpanded) {
+      setIsExpanded(false);
+      setTimeout(hideThenAnimate, 600); // collapse first, then hide UI, then animate
+    } else {
+      hideThenAnimate();
+    }
+  };
+
+  const handleToggleExpand = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsExpanded(!isExpanded);
+  };
+
+  const handleAdditionalInfoClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setShowAdditionalInfo(!showAdditionalInfo);
+  };
+
+  return (
+    <div className={`bird-detail-container ${isExiting ? 'detail-exiting' : ''}`}>
+      <div className={`info-panel-wrapper ${isExiting ? 'detail-exiting' : ''}`}>
+        <div className={`info-panel ${isExpanded ? 'expanded' : 'collapsed'}`}>
+          <div className="info-sections">
+            <div className="info-section english-section">
+              <p className="info-row info-title">{bird.english.title}</p>
+              {bird.english.details.map((detail, index) => (
+                <p key={index} className="info-row">{detail}</p>
+              ))}
+            </div>
+
+            <div className="section-divider" />
+
+            <div className="info-section arabic-section" dir="rtl">
+              <p className="info-row info-title">{bird.arabic.title}</p>
+              {bird.arabic.details.map((detail, index) => (
+                <p key={index} className="info-row">{detail}</p>
+              ))}
+            </div>
+
+            <div className="section-divider" />
+
+            <div className="info-section hebrew-section" dir="rtl">
+              <p className="info-row info-title">{bird.hebrew.title}</p>
+              {bird.hebrew.details.map((detail, index) => (
+                <p key={index} className="info-row">{detail}</p>
+              ))}
+            </div>
+          </div>
+
+          <div className="label-section" onClick={handleToggleExpand}>
+            <img 
+              src={arrowSvg} 
+              alt="Toggle" 
+              className={`toggle-arrow ${isExpanded ? 'expanded' : ''}`}
+            />
+            <p className="label-text">{bird.label}</p>
+          </div>
+        </div>
+
+        {bird.additionalInfo && (
+          <div className="additional-info-block">
+            <button
+              type="button"
+              className={`additional-info-trigger ${showAdditionalInfo ? 'expanded' : ''}`}
+              onClick={handleAdditionalInfoClick}
+              aria-label={showAdditionalInfo ? 'Close additional info' : 'Show additional info'}
+              aria-expanded={showAdditionalInfo}
+            >
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect className="plus-line-h" y="10" width="22" height="2" fill="#73C7EB"/>
+                <rect className="plus-line-v" x="10" y="0" width="2" height="22" fill="#73C7EB"/>
+              </svg>
+            </button>
+            <div className={`additional-info-content ${showAdditionalInfo ? 'expanded' : ''}`}>
+              <div className="additional-info-inner">
+                {bird.additionalInfo.hebrew && (
+                  <p className="additional-info-text additional-info-hebrew" dir="rtl">{bird.additionalInfo.hebrew}</p>
+                )}
+                {bird.additionalInfo.arabic && (
+                  <p className="additional-info-text additional-info-arabic" dir="rtl">{bird.additionalInfo.arabic}</p>
+                )}
+                {bird.additionalInfo.english && (
+                  <p className="additional-info-text additional-info-english" dir="ltr">{bird.additionalInfo.english}</p>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      <div className={`back-arrow ${isExiting ? 'detail-exiting' : ''}`} onClick={handleBackClick}>
+        <img src={arrowSvg} alt="Back" className="back-arrow-icon" />
+      </div>
+
+      {useOverlayVideo ? (
+        <div className="bird-detail-media-wrap bird-detail-media-placeholder" aria-hidden />
+      ) : (
+        <div className="bird-detail-media-wrap">
+          <video
+            src={bird.media}
+            muted
+            playsInline
+            loop
+            autoPlay
+            onEnded={(e) => e.currentTarget.play()}
+          />
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default BirdDetail;
