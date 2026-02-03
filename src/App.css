@@ -10,14 +10,14 @@
   background-color: #4D2E19;
   width: 100%;
   min-height: 100vh;
-  padding: 60px 40px;
+  padding: 40px 40px;
 }
 
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, 207px);
   column-gap: 56px;
-  row-gap: 48px;
+  row-gap: 50px;
   justify-content: center;
 }
 
@@ -62,4 +62,10 @@
   flex-direction: row-reverse;
   align-items: center;
   gap: 10px;
+}
+
+.bird-label .arrow-icon {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
 }
