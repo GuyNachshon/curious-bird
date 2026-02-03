@@ -1,5 +1,19 @@
 # React + TypeScript + Vite
 
+## Deploy (Cloudflare Workers + R2 for videos)
+
+Workers has a 25 MiB per-asset limit, so videos are not in `dist/`. Host them on **R2**:
+
+1. **Create a public R2 bucket** (Cloudflare dashboard → R2 → Create bucket, e.g. `israel-aharoni-videos`).
+2. **Enable public access** (Bucket → Settings → Public access → Allow access, and note the public URL, e.g. `https://pub-xxxx.r2.dev`).
+3. **Upload videos** into a `videos/` prefix (so you have `videos/176.mp4`, `videos/637.mp4`, etc.).  
+   CLI: `npx wrangler r2 object put israel-aharoni-videos/videos/176.mp4 --file=./public/videos/176.mp4` (create bucket first with `npx wrangler r2 bucket create israel-aharoni-videos` if needed).
+4. **Build with the video base URL**: set env `VITE_VIDEO_BASE_URL=https://pub-xxxx.r2.dev` (your bucket’s public URL) in your Cloudflare build settings, then run the build and deploy.
+
+Local dev uses `public/videos/` and `/videos/...`; production uses R2 via `VITE_VIDEO_BASE_URL`.
+
+---
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
