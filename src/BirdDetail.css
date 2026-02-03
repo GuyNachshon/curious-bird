@@ -181,7 +181,7 @@
 /* English */
 .english-section .info-row.info-title {
   font-family: 'Masada', sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
   line-height: 130%;
   letter-spacing: -0.32px;
@@ -189,7 +189,7 @@
 
 .english-section .info-row:not(.info-title) {
   font-family: 'Masada', sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 130%;
   letter-spacing: -0.32px;
@@ -199,7 +199,7 @@
 .hebrew-section .info-row.info-title {
   text-align: right;
   font-family: 'Masada', sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
   line-height: 130%;
   letter-spacing: -0.32px;
@@ -207,7 +207,7 @@
 
 .hebrew-section .info-row:not(.info-title) {
   font-family: 'Masada', sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 130%;
   letter-spacing: -0.32px;
@@ -217,7 +217,7 @@
 .arabic-section .info-row.info-title {
   text-align: right;
   font-family: 'Nassim Arabic Pro', sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 800;
   line-height: normal;
 }
@@ -225,7 +225,7 @@
 .arabic-section .info-row:not(.info-title) {
   text-align: right;
   font-family: 'Nassim Arabic Pro', sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   line-height: 143%;
 }

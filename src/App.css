@@ -46,7 +46,9 @@
 }
 
 .bird-media-wrap-hiding {
-  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  /* Use opacity so border repaints when class is removed after back transition (visibility: hidden can skip repaint) */
 }
 
 .bird-label {
