@@ -85,7 +85,7 @@
 /* Info Panel Wrapper */
 .info-panel-wrapper {
   position: absolute;
-  top: 60px;
+  top: 30px;
   right: 40px;
   z-index: 10;
   display: flex;
