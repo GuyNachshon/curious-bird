@@ -91,6 +91,19 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  gap: 14px;
+}
+
+.info-panel-label {
+  font-family: 'Ratzif22', sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 2.2px;
+  color: #87C6E9;
+  margin: 0;
+  text-align: right;
 }
 
 /* Info Panel – always open */
@@ -117,7 +130,7 @@
 .info-section {
   flex: 0 0 auto;
   min-width: 0;
-  padding: 16px 16px 16px 24px;
+  padding: 16px 16px 16px 40px;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -126,11 +139,11 @@
 
 .english-section {
   text-align: left;
-  padding: 16px 24px 16px 16px;
+  padding: 16px 40px 16px 16px;
 }
 
 .hebrew-section {
-  border-right: 1.5px solid #73c7eb;
+  /* border-right: 1.5px solid #73c7eb; */
 }
 
 .hebrew-section,
@@ -203,41 +216,6 @@
   flex-shrink: 0;
 }
 
-/* Label Section */
-.label-section {
-  width: 100px;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: flex-start;
-  padding: 12px;
-  cursor: pointer;
-  gap: 10px;
-  box-sizing: border-box;
-  /* border-left: 1.5px solid #73c7eb; */
-}
-
-.toggle-arrow {
-  width: 24px;
-  height: 24px;
-  margin-right: 4px;
-  transition: transform 0.3s ease;
-}
-
-
-.label-text {
-  font-family: 'Ratzif22', sans-serif;
-  font-size: 22px;
-  font-weight: 400;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: 2.2px;
-  color: #87C6E9;
-  margin: 0;
-  text-align: right;
-}
-
 /* Additional Info Block */
 .additional-info-block {
   margin-top: 50px;
@@ -293,7 +271,7 @@
   width: 450px;
   max-width: 100%;
   color: #73c7eb;
-  font-size: 16px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 400;
   line-height: 130%;
@@ -339,7 +317,12 @@
 @media (max-width: 1024px) {
   .info-section {
     font-size: 18px;
-    padding: 16px 16px 16px 24px;
+    padding: 16px 16px 16px 40px;
+
+  }
+
+  .english-section {
+    padding: 16px 40px 16px 16px;
   }
   
   .info-title {
@@ -350,7 +333,7 @@
     font-size: 18px;
   }
   
-  .label-text {
-    font-size: 22px;
+  .info-panel-label {
+    font-size: 18px;
   }
 }

@@ -55,6 +55,7 @@ function BirdDetail() {
         <audio ref={audioRef} src={bird.audio} loop playsInline aria-hidden />
       )}
       <div className={`info-panel-wrapper ${isExiting ? 'detail-exiting' : ''}`}>
+        <p className="info-panel-label">{bird.label}</p>
         <div className="info-panel expanded">
           <div className="info-sections">
             <div className="info-section english-section">
@@ -81,15 +82,6 @@ function BirdDetail() {
                 <p key={index} className="info-row">{detail}</p>
               ))}
             </div>
-          </div>
-
-          <div className="label-section">
-            <img
-              src={arrowSvg}
-              alt=""
-              className="toggle-arrow expanded"
-            />
-            <p className="label-text">{bird.label}</p>
           </div>
         </div>
 
