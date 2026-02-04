@@ -1,43 +1,33 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter, useLocation, useRoutes } from 'react-router-dom'
-import { AnimatePresence, motion } from 'framer-motion'
+import { BrowserRouter, useLocation, Routes, Route } from 'react-router-dom'
 import './index.css'
 import App from './App.tsx'
 import BirdDetail from './BirdDetail.tsx'
 import { BirdTransitionProvider } from './BirdTransitionContext.tsx'
 
-const routes = [
-  { path: '/', element: <App /> },
-  { path: '/bird/:id', element: <BirdDetail /> },
-]
-
-function AnimatedRoutes() {
+/** Gallery stays mounted and is only hidden on bird page, so videos don't reload on back. */
+function Root() {
   const location = useLocation()
-  const element = useRoutes(routes, location)
-  const fromBirdBack = (location.state as { fromBirdBack?: boolean } | null)?.fromBirdBack
-  const isBackToGallery = location.pathname === '/' && fromBirdBack
-
-  // Skip AnimatePresence when returning from detail – avoids detail’s full-screen exit (grow + fade)
-  if (element && isBackToGallery) {
-    return <div style={{ position: 'absolute', inset: 0 }}>{element}</div>
-  }
+  const isGallery = location.pathname === '/'
 
   return (
-    <AnimatePresence mode="wait">
-      {element && (
-        <motion.div
-          key={location.pathname}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
-          style={{ position: 'absolute', inset: 0 }}
-        >
-          {element}
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <>
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          visibility: isGallery ? 'visible' : 'hidden',
+          pointerEvents: isGallery ? 'auto' : 'none',
+          zIndex: isGallery ? 1 : 0,
+        }}
+      >
+        <App />
+      </div>
+      <Routes>
+        <Route path="/bird/:id" element={<BirdDetail />} />
+      </Routes>
+    </>
   )
 }
 
@@ -45,7 +35,7 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <BirdTransitionProvider>
-        <AnimatedRoutes />
+        <Root />
       </BirdTransitionProvider>
     </BrowserRouter>
   </StrictMode>,
