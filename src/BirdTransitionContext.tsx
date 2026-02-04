@@ -118,7 +118,6 @@ function SharedVideoOverlay() {
         zIndex: 5,
         overflow: 'hidden',
         pointerEvents: 'none',
-        border: '3px solid #73c7eb',
         boxSizing: 'border-box',
       }}
       initial={{
