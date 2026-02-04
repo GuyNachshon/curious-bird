@@ -11,17 +11,8 @@ function BirdDetail() {
   const { selectedBirdId, startBackTransition } = useBirdTransition();
   const bird = birds.find(b => b.id === id);
   const useOverlayVideo = selectedBirdId === id;
-  const [isExpanded, setIsExpanded] = useState(false);
   const [showAdditionalInfo, setShowAdditionalInfo] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsExpanded(true);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   if (!bird) {
     return <div>Bird not found</div>;
@@ -33,21 +24,8 @@ function BirdDetail() {
       navigate('/');
       return;
     }
-    const hideThenAnimate = () => {
-      setIsExiting(true);
-      setTimeout(() => startBackTransition(), 150);
-    };
-    if (isExpanded) {
-      setIsExpanded(false);
-      setTimeout(hideThenAnimate, 600); // collapse first, then hide UI, then animate
-    } else {
-      hideThenAnimate();
-    }
-  };
-
-  const handleToggleExpand = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setIsExpanded(!isExpanded);
+    setIsExiting(true);
+    setTimeout(() => startBackTransition(), 150);
   };
 
   const handleAdditionalInfoClick = (e: React.MouseEvent) => {
@@ -58,7 +36,7 @@ function BirdDetail() {
   return (
     <div className={`bird-detail-container ${isExiting ? 'detail-exiting' : ''}`}>
       <div className={`info-panel-wrapper ${isExiting ? 'detail-exiting' : ''}`}>
-        <div className={`info-panel ${isExpanded ? 'expanded' : 'collapsed'}`}>
+        <div className="info-panel expanded">
           <div className="info-sections">
             <div className="info-section english-section">
               <p className="info-row info-title">{bird.english.title}</p>
@@ -86,11 +64,11 @@ function BirdDetail() {
             </div>
           </div>
 
-          <div className="label-section" onClick={handleToggleExpand}>
-            <img 
-              src={arrowSvg} 
-              alt="Toggle" 
-              className={`toggle-arrow ${isExpanded ? 'expanded' : ''}`}
+          <div className="label-section">
+            <img
+              src={arrowSvg}
+              alt=""
+              className="toggle-arrow expanded"
             />
             <p className="label-text">{bird.label}</p>
           </div>
