@@ -1,3 +1,4 @@
+import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './App.css'
 import arrowSvg from './assets/arrow.svg'
@@ -7,6 +8,13 @@ import { useBirdTransition } from './BirdTransitionContext';
 function App() {
   const navigate = useNavigate();
   const { setTransition, selectedBirdId } = useBirdTransition();
+  const [failedVideoIds, setFailedVideoIds] = useState<Set<string>>(new Set());
+
+  const handleVideoError = useCallback((birdId: string) => {
+    setFailedVideoIds((prev) => new Set(prev).add(birdId));
+  }, []);
+
+  const visibleBirds = birds.filter((b) => !failedVideoIds.has(b.id));
 
   const handleBirdClick = (e: React.MouseEvent, birdId: string) => {
     const card = e.currentTarget;
@@ -26,7 +34,7 @@ function App() {
   return (
     <div className="gallery-container">
       <div className="gallery-grid">
-        {birds.map((bird) => (
+        {visibleBirds.map((bird) => (
           <div key={bird.id} className="bird-card" onClick={(e) => handleBirdClick(e, bird.id)}>
             <div
               className={`bird-media-wrap ${selectedBirdId === bird.id ? 'bird-media-wrap-hiding' : ''}`}
@@ -38,6 +46,7 @@ function App() {
                 loop
                 autoPlay
                 onEnded={(e) => e.currentTarget.play()}
+                onError={() => handleVideoError(bird.id)}
               />
             </div>
             <div className="bird-label">
