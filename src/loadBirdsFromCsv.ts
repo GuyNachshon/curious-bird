@@ -55,6 +55,7 @@ function rowToBird(row: Record<string, string>, index: number): BirdData {
   return {
     id: serial,
     media: `${import.meta.env.VITE_VIDEO_BASE_URL ?? ''}/videos/${serial}.mp4`,
+    audio: `${import.meta.env.VITE_VIDEO_BASE_URL ?? ''}/audio/${serial}.aac`,
     label,
     ...(hasAdditionalInfo && {
       additionalInfo: {

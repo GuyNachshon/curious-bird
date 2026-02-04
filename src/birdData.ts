@@ -3,6 +3,7 @@ import { loadBirdsFromCsv } from './loadBirdsFromCsv';
 export interface BirdData {
   id: string;
   media: string;
+  audio?: string;
   label: string;
   english: {
     title: string;

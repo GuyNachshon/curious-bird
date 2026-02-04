@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './BirdDetail.css';
 import arrowSvg from './assets/arrow.svg';
@@ -13,6 +13,22 @@ function BirdDetail() {
   const useOverlayVideo = selectedBirdId === id;
   const [showAdditionalInfo, setShowAdditionalInfo] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  useEffect(() => {
+    if (!bird?.audio) return;
+    const el = audioRef.current;
+    if (!el) return;
+    el.play().catch(() => {});
+    return () => {
+      el.pause();
+      el.currentTime = 0;
+    };
+  }, [bird?.id, bird?.audio]);
+
+  useEffect(() => {
+    if (isExiting) audioRef.current?.pause();
+  }, [isExiting]);
 
   if (!bird) {
     return <div>Bird not found</div>;
@@ -35,6 +51,9 @@ function BirdDetail() {
 
   return (
     <div className={`bird-detail-container ${isExiting ? 'detail-exiting' : ''}`}>
+      {bird.audio && (
+        <audio ref={audioRef} src={bird.audio} loop playsInline aria-hidden />
+      )}
       <div className={`info-panel-wrapper ${isExiting ? 'detail-exiting' : ''}`}>
         <div className="info-panel expanded">
           <div className="info-sections">

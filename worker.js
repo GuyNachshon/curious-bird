@@ -4,8 +4,8 @@
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
-    if (url.pathname.startsWith('/videos/')) {
-      const key = url.pathname.slice(1); // e.g. "videos/176.mp4"
+    if (url.pathname.startsWith('/videos/') || url.pathname.startsWith('/audio/')) {
+      const key = url.pathname.slice(1); // e.g. "videos/176.mp4" or "audio/169.aac"
       try {
         const object = await env.VIDEOS.get(key);
         if (object === null) return new Response('Not Found', { status: 404 });
